@@ -8,9 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
-public class ScoreDisplayerTester extends JFrame {
+public class ScoreTimer extends JFrame {
 
 	private JPanel contentPane;
 	
@@ -21,7 +22,7 @@ public class ScoreDisplayerTester extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ScoreDisplayerTester frame = new ScoreDisplayerTester();
+					ScoreTimer frame = new ScoreTimer();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +34,7 @@ public class ScoreDisplayerTester extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ScoreDisplayerTester() {
+	public ScoreTimer() {
 		
 		// set appearance of frame
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,30 +45,39 @@ public class ScoreDisplayerTester extends JFrame {
 		setContentPane(contentPane);
 		
 		// add a score display label
-		JLabel label = new JLabel("0");
+		JLabel label = new JLabel("00000");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(label, BorderLayout.CENTER);
 		
-		// construct ScoreDisplayer object
-		ScoreDisplayer counter = new ScoreDisplayer(label);
-		counter.start();
+		// listen for timer then add 1 to score every interval
+		ActionListener scoreAdder = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int score = Integer.parseInt(label.getText()) + 1;
+				label.setText(String.format("%05d", score));
+			}
+		};
+		
+		// construct a Timer to activate scoreAdder after every interval
+		Timer timer = new Timer(100, scoreAdder);
+		timer.setInitialDelay(0);
 		
 		// add a start button
 		JButton btnStart = new JButton("Start");
-		// start ScoreDisplayer counting when pressed
+		// reset score and start timer when pressed
 		btnStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				counter.startCounting();
+				label.setText("0");
+				timer.start();
 			}
 		});
 		contentPane.add(btnStart, BorderLayout.NORTH);
 		
 		// add an end button
 		JButton btnEnd = new JButton("End");
-		// end ScoreDisplayer counting when pressed
+		// stop timer when pressed
 		btnEnd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				counter.stopCounting();
+				timer.stop();
 			}
 		});
 		contentPane.add(btnEnd, BorderLayout.SOUTH);
