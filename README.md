@@ -2,6 +2,13 @@
 A side-scroller obstacle game, inspired by the no Internet dino game.
 
 # changelog
+## [x.x.x] 2019-21-4
+### Added
+- Application.java file created to run main method.
+
+### Changed
+- Moved main method out of ScoreTimer.java.
+
 ## [x.x.x] 2019-20-4
 ### Added
 - ScoreTimer.java file.
