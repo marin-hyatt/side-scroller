@@ -1,49 +1,33 @@
-import javax.swing.*;
+import javax.swing.JFrame;
+import java.awt.Canvas;
+import java.awt.Dimension;
 import java.awt.event.*;
 
-public class Board extends JPanel implements KeyListener, Runnable{
-	
-	private Timer timer;
-	private Thread gameAnimator;
+public class Board implements Commons{
+	private JFrame frame;
+	private Canvas canvas;
 	
 	public Board() {
-		add(new ScoreTimer());
+		initUI();
 	}
 	
-	@Override
-	public void keyTyped(KeyEvent event) {
-		if(event.getKeyCode() == KeyEvent.VK_SPACE){
-			//game starts
-		}
-		else if(event.getKeyCode() == KeyEvent.VK_UP) {
-			//dinosaur jumps once 
-		}
-	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+	private void initUI() {
+		//Creating the window for our game
+		frame = new JFrame(GAME_TITLE);
+		frame.setSize(BOARD_WIDTH, BOARD_HEIGHT);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
+		
+		//Creating a canvas to add to the window
+		canvas = new Canvas();
+		canvas.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+		canvas.setMaximumSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+		canvas.setMinimumSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+		
+		frame.add(canvas);
+		frame.pack();
 		
 	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void run() {
-		
-		
-	}
-	
-	public synchronized void start() {
-		
-	}
-	
-	public synchronized void stop() {
-		
-	}
-	
 }
