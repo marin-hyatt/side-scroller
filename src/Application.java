@@ -14,7 +14,7 @@ public class Application implements Commons{
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						new DinoGame();
+						new Board();
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

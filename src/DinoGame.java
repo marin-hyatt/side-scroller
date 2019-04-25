@@ -1,70 +1,86 @@
 import java.awt.Graphics;
+
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class DinoGame implements Commons, Runnable{
+import java.awt.event.*;
+
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class DinoGame extends JPanel implements Commons{
 	
-	private Board board;
-	private Thread gameAnimator;
+	//private Board board;
+	private Timer timer;
 	private boolean running = false;
+	private Student student;
 	
-	private BufferStrategy bs;
-	private Graphics g;
+	//private BufferStrategy bs;
+	//private Graphics g;
 	
-	private BufferedImage student, pencil, homework, bg;
+	private BufferedImage pencil, homework;
 	
 	public DinoGame() {
-		start();
+		student = new Student();
+		timer = new Timer(FRAME_RATE, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	              update();
+	              repaint();
+	          }	
+		});
+		run();
 	}
 	
 	private void initGame() {
-		board = new Board();
+// 		board = new Board();
+		start();
 	}
 	
 	private void initAssets() {
-		student = ImageLoader.loadImage("res" + File.separator + "student.png");
 		pencil = ImageLoader.loadImage("res" + File.separator + "pencil.png");
 		homework = ImageLoader.loadImage("res" + File.separator + "homework.png");
-		bg = ImageLoader.loadImage("res" + File.separator + "side scroller background.png");
+		//bg = ImageLoader.loadImage("res" + File.separator + "side scroller background.png");
 		
 	}
 	
-	private void update(){
-		// stage 1 in every game cycle
-	}
-	
-	private void render(){
-		// stage 2 in every game cycle, happens after update()
-		// sets up buffer and graphics to draw images
-		bs = board.getCanvas().getBufferStrategy();
-		if (bs == null) {
-			board.getCanvas().createBufferStrategy(3);
-			return;
-		}
-		g = bs.getDrawGraphics();
-		
-		// draws images
-		g.drawImage(bg, 0, 0, null);
-		g.drawImage(student, BOARD_WIDTH / 10, BOARD_HEIGHT / 2, null);
-		
-		// shows images
-		bs.show();
-		g.dispose();
-	}
+//	private void render(){
+//		// stage 2 in every game cycle, happens after update()
+//		// sets up buffer and graphics to draw images
+//		bs = board.getCanvas().getBufferStrategy();
+//		if (bs == null) {
+//			board.getCanvas().createBufferStrategy(3);
+//			return;
+//		}
+//		g = bs.getDrawGraphics();
+//		
+//		// draws images
+//		g.drawImage(student, BOARD_WIDTH / 10, BOARD_HEIGHT / 2, null);
+//		
+//		// shows images
+//		bs.show();
+//		g.dispose();
+//	}
 	
 	public void run(){
-		
 		initGame();
 		initAssets();
 		
 		while(running){
 			update();
-			render();
+			repaint();
 		}
-		
 		stop();
+	}
+	
+	private void update(){
+		//stage 1 in every game cycle, update position of all sprites and game state
 		
+	}
+	
+	public void paintComponent(Graphics g) {
+		//renders the sprites and background, like stage 2 of every game cycle
+		 student.move(g);          
 	}
 	
 	public synchronized void start(){
@@ -75,8 +91,7 @@ public class DinoGame implements Commons, Runnable{
 		//if game isn't already running, start
 		else {
 			running = true;
-			gameAnimator = new Thread(this);
-			gameAnimator.start();
+			timer.start();
 		}
 	}
 	
@@ -89,11 +104,7 @@ public class DinoGame implements Commons, Runnable{
 		else{
 			running = false;
 		}
-		try {
-			gameAnimator.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+			timer.stop();
 	}
 	
 }
