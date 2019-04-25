@@ -1,3 +1,6 @@
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class DinoGame implements Commons, Runnable{
 	
@@ -5,12 +8,18 @@ public class DinoGame implements Commons, Runnable{
 	private Thread gameAnimator;
 	private boolean running = false;
 	
+	private BufferStrategy bs;
+	private Graphics g;
+	
+	private BufferedImage student;
+	
 	public DinoGame() {
 		start();
 	}
 	
 	private void initGame() {
 		board = new Board();
+		student = ImageLoader.loadImage("res\\student.png");
 	}
 	
 	private void update(){
@@ -19,6 +28,17 @@ public class DinoGame implements Commons, Runnable{
 	
 	private void render(){
 		//stage 2 in every game cycle, happens after update()
+		bs = board.getCanvas().getBufferStrategy();
+		if (bs == null) {
+			board.getCanvas().createBufferStrategy(3);
+			return;
+		}
+		
+		g = bs.getDrawGraphics();
+		g.drawImage(student, BOARD_WIDTH / 10, BOARD_HEIGHT / 2, null);
+		
+		bs.show();
+		g.dispose();
 	}
 	
 	public void run(){

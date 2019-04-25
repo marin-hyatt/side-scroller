@@ -30,4 +30,12 @@ public class Board implements Commons{
 		frame.pack();
 		
 	}
+	
+	/**
+	 * Returns stored Canvas.
+	 * @return the stored Canvas
+	 */
+	public Canvas getCanvas() {
+		return canvas;
+	}
 }
