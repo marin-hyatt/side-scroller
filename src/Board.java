@@ -1,13 +1,12 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.event.*;
+import java.awt.image.BufferStrategy;
 
 public class Board implements Commons{
 	private JFrame frame;
 	private JPanel contentPane;
+	private static BufferStrategy bs;
 	
 	public Board() {
 		initUI();
@@ -22,6 +21,13 @@ public class Board implements Commons{
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
+		// sets up buffer
+		bs = frame.getBufferStrategy();
+		if (bs == null) {
+			frame.createBufferStrategy(3);
+			return;
+		}
+		
 		//Creating a JPanel to add to the window
 		contentPane = new DinoGame();
 		contentPane.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
@@ -33,11 +39,7 @@ public class Board implements Commons{
 		
 	}
 	
-//	/**
-//	 * Returns stored Canvas.
-//	 * @return the stored Canvas
-//	 */
-//	public Canvas getCanvas() {
-//		return canvas;
-//	}
+	public static BufferStrategy getBoardBS() {
+		return bs;
+	}
 }
