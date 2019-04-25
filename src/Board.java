@@ -1,13 +1,10 @@
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.event.*;
 
 public class Board implements Commons{
 	private JFrame frame;
-	private JPanel contentPane;
+	private Canvas canvas;
 	
 	public Board() {
 		initUI();
@@ -22,22 +19,22 @@ public class Board implements Commons{
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		
-		//Creating a JPanel to add to the window
-		contentPane = new DinoGame();
-		contentPane.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
-		contentPane.setMaximumSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
-		contentPane.setMinimumSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+		//Creating a canvas to add to the window
+		canvas = new Canvas();
+		canvas.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+		canvas.setMaximumSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+		canvas.setMinimumSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
 		
-		frame.add(contentPane);
+		frame.add(canvas);
 		frame.pack();
 		
 	}
 	
-//	/**
-//	 * Returns stored Canvas.
-//	 * @return the stored Canvas
-//	 */
-//	public Canvas getCanvas() {
-//		return canvas;
-//	}
+	/**
+	 * Returns stored Canvas.
+	 * @return the stored Canvas
+	 */
+	public Canvas getCanvas() {
+		return canvas;
+	}
 }
