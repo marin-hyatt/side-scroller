@@ -3,6 +3,8 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import javax.swing.Timer;
+
 public class DinoGame implements Commons, Runnable{
 	
 	private Board board;
@@ -12,7 +14,9 @@ public class DinoGame implements Commons, Runnable{
 	private BufferStrategy bs;
 	private Graphics g;
 	
-	private BufferedImage student, pencil, homework, bg;
+	private BufferedImage student, pencil, homework;
+	private Background bg;
+	private Timer gameTimer;
 	
 	public DinoGame() {
 		start();
@@ -22,11 +26,15 @@ public class DinoGame implements Commons, Runnable{
 		board = new Board();
 	}
 	
-	private void initAssets() {
+	private void initSprites() {
 		student = ImageLoader.loadImage("res" + File.separator + "student.png");
 		pencil = ImageLoader.loadImage("res" + File.separator + "pencil.png");
 		homework = ImageLoader.loadImage("res" + File.separator + "homework.png");
-		bg = ImageLoader.loadImage("res" + File.separator + "bg.png");
+		
+		bg = new Background(ImageLoader.loadImage("res" + File.separator + "bg.png"));
+		
+		gameTimer = new Timer(100, spriteUpdater);
+		gameTimer.setInitialDelay(0);
 		
 	}
 	
@@ -44,8 +52,9 @@ public class DinoGame implements Commons, Runnable{
 		}
 		g = bs.getDrawGraphics();
 		
+		bg.setGraphics(g);
+		
 		// draws images
-		g.drawImage(bg, 0, 0, null);
 		g.drawImage(student, BOARD_WIDTH / 10, BOARD_HEIGHT / 2, null);
 		
 		// shows images
@@ -56,7 +65,7 @@ public class DinoGame implements Commons, Runnable{
 	public void run(){
 		
 		initGame();
-		initAssets();
+		initSprites();
 		
 		while(running){
 			update();
