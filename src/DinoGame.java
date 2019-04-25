@@ -1,37 +1,49 @@
+import java.awt.Graphics;
+import java.awt.event.*;
 
-public class DinoGame implements Commons, Runnable{
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class DinoGame extends JPanel implements Commons{
 	
-	private Board board;
-	private Thread gameAnimator;
+	//private Board board;
+	private Timer timer;
 	private boolean running = false;
+	private Student student;
 	
 	public DinoGame() {
-		start();
+		student = new Student();
+		timer = new Timer(FRAME_RATE, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+	              update();
+	              repaint();
+	          }	
+		});
+		run();
 	}
 	
 	private void initGame() {
-		board = new Board();
-	}
-	
-	private void update(){
-		//stage 1 in every game cycle
-	}
-	
-	private void render(){
-		//stage 2 in every game cycle, happens after update()
+//		board = new Board();
+		start();
 	}
 	
 	public void run(){
-		
 		initGame();
-		
 		while(running){
 			update();
-			render();
+			repaint();
 		}
-		
 		stop();
+	}
+	
+	private void update(){
+		//stage 1 in every game cycle, update position of all sprites and game state
 		
+	}
+	
+	public void paintComponent(Graphics g) {
+		//renders the sprites and background, like stage 2 of every game cycle
+		 student.move(g);          
 	}
 	
 	public synchronized void start(){
@@ -42,8 +54,7 @@ public class DinoGame implements Commons, Runnable{
 		//if game isn't already running, start
 		else {
 			running = true;
-			gameAnimator = new Thread(this);
-			gameAnimator.start();
+			timer.start();
 		}
 	}
 	
@@ -56,11 +67,7 @@ public class DinoGame implements Commons, Runnable{
 		else{
 			running = false;
 		}
-		try {
-			gameAnimator.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+			timer.stop();
 	}
 	
 }
