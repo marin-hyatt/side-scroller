@@ -23,20 +23,23 @@ public class DinoGame implements Commons, Runnable{
 	}
 	
 	private void update(){
-		//stage 1 in every game cycle
+		// stage 1 in every game cycle
 	}
 	
 	private void render(){
-		//stage 2 in every game cycle, happens after update()
+		// stage 2 in every game cycle, happens after update()
+		// sets up buffer and graphics to draw images
 		bs = board.getCanvas().getBufferStrategy();
 		if (bs == null) {
 			board.getCanvas().createBufferStrategy(3);
 			return;
 		}
-		
 		g = bs.getDrawGraphics();
+		
+		// draws images
 		g.drawImage(student, BOARD_WIDTH / 10, BOARD_HEIGHT / 2, null);
 		
+		// shows images
 		bs.show();
 		g.dispose();
 	}
