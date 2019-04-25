@@ -12,7 +12,7 @@ public class DinoGame implements Commons, Runnable{
 	private BufferStrategy bs;
 	private Graphics g;
 	
-	private BufferedImage student, pencil, homework;
+	private BufferedImage student, pencil, homework, bg;
 	
 	public DinoGame() {
 		start();
@@ -26,6 +26,7 @@ public class DinoGame implements Commons, Runnable{
 		student = ImageLoader.loadImage("res" + File.separator + "student.png");
 		pencil = ImageLoader.loadImage("res" + File.separator + "pencil.png");
 		homework = ImageLoader.loadImage("res" + File.separator + "homework.png");
+		bg = ImageLoader.loadImage("res" + File.separator + "side scroller background.png");
 		
 	}
 	
@@ -44,6 +45,7 @@ public class DinoGame implements Commons, Runnable{
 		g = bs.getDrawGraphics();
 		
 		// draws images
+		g.drawImage(bg, 0, 0, null);
 		g.drawImage(student, BOARD_WIDTH / 10, BOARD_HEIGHT / 2, null);
 		
 		// shows images
