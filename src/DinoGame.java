@@ -1,6 +1,7 @@
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class DinoGame implements Commons, Runnable{
 	
@@ -11,7 +12,7 @@ public class DinoGame implements Commons, Runnable{
 	private BufferStrategy bs;
 	private Graphics g;
 	
-	private BufferedImage student;
+	private BufferedImage student, pencil, homework;
 	
 	public DinoGame() {
 		start();
@@ -19,7 +20,13 @@ public class DinoGame implements Commons, Runnable{
 	
 	private void initGame() {
 		board = new Board();
-		student = ImageLoader.loadImage("res\\student.png");
+	}
+	
+	private void initAssets() {
+		student = ImageLoader.loadImage("res" + File.separator + "student.png");
+		pencil = ImageLoader.loadImage("res" + File.separator + "pencil.png");
+		homework = ImageLoader.loadImage("res" + File.separator + "homework.png");
+		
 	}
 	
 	private void update(){
@@ -47,6 +54,7 @@ public class DinoGame implements Commons, Runnable{
 	public void run(){
 		
 		initGame();
+		initAssets();
 		
 		while(running){
 			update();
