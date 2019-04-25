@@ -10,7 +10,7 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.border.EmptyBorder;
 
-public class ScoreTimer extends JFrame {
+public class ScoreTimer extends JPanel {
 
 	private JPanel contentPane;
 	
@@ -18,15 +18,8 @@ public class ScoreTimer extends JFrame {
 	 * Create the frame.
 	 */
 	public ScoreTimer() {
-		
-		// set appearance of frame
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
-		
+        
 		// add a score display label
 		JLabel label = new JLabel("00000");
 		label.setHorizontalAlignment(SwingConstants.CENTER);

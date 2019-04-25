@@ -1,34 +1,25 @@
+
+import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 
-public class Application extends JFrame{
-
-	/**
-	 * Launch the application.
-	 */
-
-	public Application() {
-		initUI();
-	}
-
-	private void initUI() {
-		add(new ScoreTimer());
-		// set appearance of frame
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-	}
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ScoreTimer frame = new ScoreTimer();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
+public class Application implements Commons{
+	  
+	  public static void main(String[] args) {
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						new DinoGame();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
-			}
-		});
-	}
+			});
+	  }
 }
 
