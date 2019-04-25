@@ -40,7 +40,7 @@ public class DinoGame extends JPanel implements Commons{
 	private void initAssets() {
 		pencil = ImageLoader.loadImage("res" + File.separator + "pencil.png");
 		homework = ImageLoader.loadImage("res" + File.separator + "homework.png");
-		//bg = ImageLoader.loadImage("res" + File.separator + "side scroller background.png");
+		//bg = ImageLoader.loadImage("res" + File.separator + "bg.png");
 		
 	}
 	
