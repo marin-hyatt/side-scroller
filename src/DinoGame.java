@@ -1,75 +1,48 @@
-import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.Timer;
 
 public class DinoGame implements Commons, Runnable{
 	
-	private Board board;
 	private Thread gameAnimator;
 	private boolean running = false;
 	
-	private BufferStrategy bs;
-	private Graphics g;
-	
-	private BufferedImage student, pencil, homework;
+//	private BufferedImage student, pencil, homework;
 	private Background bg;
 	private Timer gameTimer;
+	private ArrayList<Sprite> allSprites;
+	private SpriteUpdater spriteUpdater;
 	
 	public DinoGame() {
 		start();
 	}
 	
 	private void initGame() {
-		board = new Board();
+		initSprites();
 	}
 	
 	private void initSprites() {
-		student = ImageLoader.loadImage("res" + File.separator + "student.png");
-		pencil = ImageLoader.loadImage("res" + File.separator + "pencil.png");
-		homework = ImageLoader.loadImage("res" + File.separator + "homework.png");
-		
+		allSprites = new ArrayList<Sprite>();
+//		student = ImageLoader.loadImage("res" + File.separator + "student.png");
+//		pencil = ImageLoader.loadImage("res" + File.separator + "pencil.png");
+//		homework = ImageLoader.loadImage("res" + File.separator + "homework.png");
 		bg = new Background(ImageLoader.loadImage("res" + File.separator + "bg.png"));
+
+		allSprites.add((Sprite) bg);
+		spriteUpdater = new SpriteUpdater(allSprites);
 		
-		gameTimer = new Timer(100, spriteUpdater);
+		gameTimer = new Timer(TICK, spriteUpdater);
 		gameTimer.setInitialDelay(0);
-		
-	}
-	
-	private void update(){
-		// stage 1 in every game cycle
-	}
-	
-	private void render(){
-		// stage 2 in every game cycle, happens after update()
-		// sets up buffer and graphics to draw images
-		bs = board.getCanvas().getBufferStrategy();
-		if (bs == null) {
-			board.getCanvas().createBufferStrategy(3);
-			return;
-		}
-		g = bs.getDrawGraphics();
-		
-		bg.setGraphics(g);
-		
-		// draws images
-		g.drawImage(student, BOARD_WIDTH / 10, BOARD_HEIGHT / 2, null);
-		
-		// shows images
-		bs.show();
-		g.dispose();
 	}
 	
 	public void run(){
 		
 		initGame();
-		initSprites();
+		gameTimer.start();
 		
 		while(running){
-			update();
-			render();
+			
 		}
 		
 		stop();

@@ -1,4 +1,4 @@
-import java.awt.event.ActionEvent;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class Background extends Sprite {
@@ -11,13 +11,12 @@ public class Background extends Sprite {
 		this.bg = bg;
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		getGraphics().drawImage(bg, x + 1, 0, null);
-	}
-	
-	public void render() {
-		getGraphics().drawImage(bg, x + 1, 0, null);
+	public void render(Graphics g) {
+		if (x == -541) {
+			x = 0;
+		}
+		g.drawImage(bg, x, 0, null);
+		x--;
 	}
 
 }
