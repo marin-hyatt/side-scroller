@@ -13,7 +13,6 @@ public class Background extends Sprite {
 	
 	@Override
 	public void render(Graphics g) {
-		System.out.println(x);
 		if (x <= -BG_WIDTH) {
 			x = 0;
 		}
