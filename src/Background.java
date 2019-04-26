@@ -3,19 +3,21 @@ import java.awt.image.BufferedImage;
 
 public class Background extends Sprite {
 
+	private static int BG_WIDTH = 541;
 	private int x;
-	private BufferedImage bg;
 	
 	public Background(BufferedImage bg) {
+		super(bg);
 		x = 0;
-		this.bg = bg;
 	}
 	
+	@Override
 	public void render(Graphics g) {
-		if (x == -541) {
+		System.out.println(x);
+		if (x <= -BG_WIDTH) {
 			x = 0;
 		}
-		g.drawImage(bg, x, 0, null);
+		g.drawImage(getImg(), x, 0, null);
 		x--;
 	}
 
