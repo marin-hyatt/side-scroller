@@ -1,26 +1,23 @@
 # side-scroller
 A side-scroller obstacle game, inspired by the no Internet dino game.
 
-# changelog
-## [x.x.x] 2019-21-4
-### Added
-- Application.java file.
+## Latest commit
+Add obstacles and spawner
 
-### Changed
-- Main method is now in Application.
+Add the Obstacle class for the pencil and homework sprites. Add the 
+ObstacleSpawner class to reset the position of the Obstacle objects at
+random intervals, essentially "spawning" each obstacle randomly. 
+Modifies the SpriteUpdater class to only render objects that have been
+reset by ObstacleSpawner by only rendering Obstacle objects that have
+an x-coordinate visible in the window.
 
-## [x.x.x] 2019-20-4
-### Added
-- ScoreTimer.java file.
-
-### Changed
-- Score is now kept using javax.swing.Timer.
-
-### Removed
-- ScoreDisplayer.java's use of Thread was badly designed.
-- ScoreDisplayerTester.java removed.
-
-## [x.x.x] 2019-19-4
-### Added
-- ScoreDisplayer.java updates a JLabel with a score at a constant interval.
-- ScoreDisplayerTester.java starts, stops, and resets score counting with two JButtons.
+Issues with the solution:
+- The computer may consistently run its fan when the program starts now.
+  This is likely because of some extreme inefficiency in the way
+  obstacles are implemented -- perhaps its because SpriteUpdater must
+  loops through inactive obstacles, or because two ActionListeners
+  running at 60 FPS is too much.
+- This implementation has the potential for error when ObstacleSpawner
+  spawns an obstacle that is already spawned and moving across the
+  screen. ObstacleSpawner may also only spawn one of each type of
+  obstacle at the time.
