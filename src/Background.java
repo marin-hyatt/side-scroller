@@ -16,8 +16,8 @@ public class Background extends Sprite {
 	 * Constructs a Background with an image and an x-coordinate.
 	 * @param bg the background image
 	 */
-	public Background(BufferedImage bg) {
-		super(bg);
+	public Background(BufferedImage img) {
+		super(img);
 		x = 0;
 	}
 	

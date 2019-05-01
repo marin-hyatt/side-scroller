@@ -8,10 +8,11 @@ public class DinoGame implements Commons, Runnable{
 	private boolean running = false;
 	
 //	private BufferedImage student, pencil, homework;
-	private Student student;
+	private Player player;
 	private Background bg;
 	private Timer gameTimer;
 	private SpriteUpdater spriteUpdater;
+	private Obstacle[] obstacleArr;
 	
 	public DinoGame() {
 		start();
@@ -22,16 +23,21 @@ public class DinoGame implements Commons, Runnable{
 	}
 	
 	private void initSprites() {
-		student = new Student(ImageLoader.loadImage("res" + File.separator + "student.png"));
-//		pencil = ImageLoader.loadImage("res" + File.separator + "pencil.png");
-//		homework = ImageLoader.loadImage("res" + File.separator + "homework.png");
+		player = new Player(ImageLoader.loadImage("res" + File.separator + "student.png"));
 		bg = new Background(ImageLoader.loadImage("res" + File.separator + "bg.png"));
+		obstacleArr = new Obstacle[] {
+				new Obstacle(ImageLoader.loadImage("res" + File.separator + "pencil.png")),
+				new Obstacle(ImageLoader.loadImage("res" + File.separator + "homework.png"))
+			};
 
 		spriteUpdater = new SpriteUpdater();
 		spriteUpdater.addSprite((Sprite) bg);
-		spriteUpdater.addSprite((Sprite) student);
+		spriteUpdater.addSprite((Sprite) player);
+		spriteUpdater.addSprite((Sprite) obstacleArr[0]);
+		spriteUpdater.addSprite((Sprite) obstacleArr[1]);
 		
 		gameTimer = new Timer(TICK, spriteUpdater);
+		gameTimer.addActionListener(new ObstacleSpawner(obstacleArr));
 		gameTimer.setInitialDelay(0);
 	}
 	

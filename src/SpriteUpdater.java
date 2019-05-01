@@ -36,6 +36,7 @@ public class SpriteUpdater implements ActionListener {
 	 * object onto the buffer. The buffer then shows the render on the screen and the Graphics
 	 * object is disposed.
 	 */
+	@Override
 	public void actionPerformed(ActionEvent e) {
 		
 		bs = board.getCanvas().getBufferStrategy();
@@ -48,7 +49,16 @@ public class SpriteUpdater implements ActionListener {
 		
 		// draws images
 		for (Sprite eachSprite : sprites) {
-			eachSprite.render(g);
+			// only draws obstacles if they are in the screen
+			// TODO Re-think this strategy. My computer runs its fans every time I start the program now, which is probably a bad thing.
+			if ((eachSprite instanceof Obstacle)) {
+				if (((Obstacle) eachSprite).getX() > 0) {
+					eachSprite.render(g);
+				}
+			}
+			else {
+				eachSprite.render(g);
+			}
 		}
 
 		// shows images
