@@ -1,5 +1,4 @@
 import java.io.File;
-import java.util.ArrayList;
 
 import javax.swing.Timer;
 
@@ -12,7 +11,6 @@ public class DinoGame implements Commons, Runnable{
 	private Student student;
 	private Background bg;
 	private Timer gameTimer;
-	private ArrayList<Sprite> allSprites;
 	private SpriteUpdater spriteUpdater;
 	
 	public DinoGame() {
@@ -24,15 +22,14 @@ public class DinoGame implements Commons, Runnable{
 	}
 	
 	private void initSprites() {
-		allSprites = new ArrayList<Sprite>();
 		student = new Student(ImageLoader.loadImage("res" + File.separator + "student.png"));
 //		pencil = ImageLoader.loadImage("res" + File.separator + "pencil.png");
 //		homework = ImageLoader.loadImage("res" + File.separator + "homework.png");
 		bg = new Background(ImageLoader.loadImage("res" + File.separator + "bg.png"));
 
-		allSprites.add((Sprite) bg);
-		allSprites.add((Sprite) student);
-		spriteUpdater = new SpriteUpdater(allSprites);
+		spriteUpdater = new SpriteUpdater();
+		spriteUpdater.addSprite((Sprite) bg);
+		spriteUpdater.addSprite((Sprite) student);
 		
 		gameTimer = new Timer(TICK, spriteUpdater);
 		gameTimer.setInitialDelay(0);
