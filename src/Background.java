@@ -2,7 +2,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 /**
- * The Background class is the sprite of the background.
+ * The sprite of the looping background.
  * @author 
  *
  */

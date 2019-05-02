@@ -2,7 +2,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 /**
- * The Player class is the sprite of the player.
+ * The sprite of the player.
  * @author 
  *
  */
