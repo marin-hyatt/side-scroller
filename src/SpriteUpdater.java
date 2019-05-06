@@ -51,7 +51,7 @@ public class SpriteUpdater implements ActionListener {
 		for (Sprite eachSprite : sprites) {
 			// only draws obstacles if they are in the screen
 			// TODO Re-think this strategy. My computer runs its fans every time I start the program now, which is probably a bad thing.
-			if ((eachSprite instanceof Obstacle)) {
+			if ((eachSprite instanceof Obstacle || eachSprite instanceof AirObstacle)) {
 				if (((Obstacle) eachSprite).getX() > 0) {
 					eachSprite.render(g);
 				}

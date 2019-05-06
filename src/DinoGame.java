@@ -26,7 +26,7 @@ public class DinoGame implements Commons, Runnable{
 		player = new Player(ImageLoader.loadImage("res" + File.separator + "student.png"));
 		bg = new Background(ImageLoader.loadImage("res" + File.separator + "bg.png"));
 		obstacleArr = new Obstacle[] {
-				new Obstacle(ImageLoader.loadImage("res" + File.separator + "pencil.png")),
+				(Obstacle) (new AirObstacle(ImageLoader.loadImage("res" + File.separator + "pencil.png"))),
 				new Obstacle(ImageLoader.loadImage("res" + File.separator + "homework.png"))
 			};
 
