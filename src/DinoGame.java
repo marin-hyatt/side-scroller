@@ -2,23 +2,24 @@ import java.io.File;
 
 import javax.swing.Timer;
 
-public class DinoGame implements Commons, Runnable{
+public class DinoGame implements Commons, Runnable, PlayerActions {
 	
 	private Thread gameAnimator;
 	private boolean running = false;
 	
-//	private BufferedImage student, pencil, homework;
 	private Player player;
 	private Background bg;
 	private Timer gameTimer;
 	private SpriteUpdater spriteUpdater;
 	private Obstacle[] obstacleArr;
+	private KeyboardListener keyListener;
 	
 	public DinoGame() {
 		start();
 	}
 	
 	private void initGame() {
+		keyListener = new KeyboardListener(this);
 		initSprites();
 	}
 	
@@ -35,6 +36,7 @@ public class DinoGame implements Commons, Runnable{
 		spriteUpdater.addSprite((Sprite) player);
 		spriteUpdater.addSprite((Sprite) obstacleArr[0]);
 		spriteUpdater.addSprite((Sprite) obstacleArr[1]);
+		spriteUpdater.registerKeyListener(keyListener);
 		
 		gameTimer = new Timer(TICK, spriteUpdater);
 		gameTimer.addActionListener(new ObstacleSpawner(obstacleArr));
@@ -81,6 +83,11 @@ public class DinoGame implements Commons, Runnable{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void jump() {
+		player.jump();	
 	}
 	
 }

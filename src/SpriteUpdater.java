@@ -66,4 +66,9 @@ public class SpriteUpdater implements ActionListener {
 		g.dispose();
 		
 	}
+	
+	public void registerKeyListener(KeyboardListener k) {
+		board.getFrame().addKeyListener(k);
+	}
+	
 }

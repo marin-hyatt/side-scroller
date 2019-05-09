@@ -1,3 +1,4 @@
+
 import javax.swing.JFrame;
 import java.awt.Canvas;
 import java.awt.Dimension;
@@ -28,6 +29,10 @@ public class Board implements Commons{
 		frame.add(canvas);
 		frame.pack();
 		
+	}
+	
+	public JFrame getFrame() {
+		return frame;
 	}
 	
 	/**
