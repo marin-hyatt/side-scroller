@@ -9,7 +9,9 @@ import java.awt.image.BufferedImage;
 public class Background extends Sprite {
 
 	private static int BG_WIDTH = 541;
-	private static int SPEED = 1;
+	private static int TICKS_UNTIL_FASTER = 600;
+	private int speed;
+	private int ticksUntilFaster;
 	private int x;
 	
 	/**
@@ -19,6 +21,8 @@ public class Background extends Sprite {
 	public Background(BufferedImage img) {
 		super(img);
 		x = 0;
+		speed = 1;
+		ticksUntilFaster = TICKS_UNTIL_FASTER;
 	}
 	
 	/**
@@ -30,7 +34,16 @@ public class Background extends Sprite {
 			x = 0;
 		}
 		g.drawImage(getImg(), x, 0, null);
-		x -= SPEED;
+		x -= speed;
+		incrementTimer();
+	}
+	
+	public void incrementTimer() {
+		ticksUntilFaster--;
+		if (ticksUntilFaster == 0) {
+			speed++;
+			ticksUntilFaster = TICKS_UNTIL_FASTER;
+		}
 	}
 
 }

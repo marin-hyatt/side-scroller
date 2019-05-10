@@ -8,7 +8,9 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Obstacle extends Sprite {
 
-	public static int SPEED = 3;
+	private static int TICKS_UNTIL_FASTER = 600;
+	public int speed;
+	public int ticksUntilFaster;
 	private int x;
 	
 	/**
@@ -18,6 +20,8 @@ public abstract class Obstacle extends Sprite {
 	public Obstacle(BufferedImage img) {
 		super(img);
 		x = 0;
+		speed = 4;
+		ticksUntilFaster = TICKS_UNTIL_FASTER;
 	}
 
 	/**
@@ -43,6 +47,22 @@ public abstract class Obstacle extends Sprite {
 	
 	public void modifyX(int newPos) {
 		x += newPos;
+	}
+	
+	public int getSpeed() {
+		return speed;
+	}
+	
+	public void speedUp() {
+		speed++;
+	}
+	
+	public void decrementTimer() {
+		ticksUntilFaster--;
+		if (ticksUntilFaster == 0) {
+			speedUp();
+			ticksUntilFaster = TICKS_UNTIL_FASTER;
+		}
 	}
 	
 
