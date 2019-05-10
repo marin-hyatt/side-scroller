@@ -11,7 +11,12 @@ public class KeyboardListener implements KeyListener{
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
-		p.jump();
+		if(e.getKeyChar() == 'a') {
+			p.initTimer();
+		}
+		else if(e.getKeyChar() == ' ') {
+			p.jump();
+		}
 	}
 
 	@Override

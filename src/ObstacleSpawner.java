@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
  */
 public class ObstacleSpawner implements ActionListener {
 
+	final int RANGE = 76;
+	final int MAX = 255;
+	
 	private int ticksUntilSpawn;
 	private Obstacle[] obstacles;
 	
@@ -17,7 +20,7 @@ public class ObstacleSpawner implements ActionListener {
 	 * @param obstacleArray all obstacles to be spawned
 	 */
 	public ObstacleSpawner(Obstacle[] obstacleArray) {
-		ticksUntilSpawn = (int) (Math.random() * 76 + 225);
+		ticksUntilSpawn = (int) (Math.random() * RANGE + MAX);
 		obstacles = obstacleArray;
 	}
 	
@@ -33,7 +36,7 @@ public class ObstacleSpawner implements ActionListener {
 		if (ticksUntilSpawn == 0) {
 			int chosenIndex = (int) (Math.random() * obstacles.length);
 			obstacles[chosenIndex].reset();
-			ticksUntilSpawn = (int) (Math.random() * 76 + 225);
+			ticksUntilSpawn = (int) (Math.random() * RANGE + MAX);
 		}
 		else {
 			ticksUntilSpawn--;

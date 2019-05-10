@@ -14,7 +14,7 @@ public class Player extends Sprite {
 	private double jumpStrength = 4;
 	private double weight = 0.08;
 	private int topPoint = yPos - 100;
-	private boolean firstHalf;
+	private boolean firstHalf = false;
 	
 	/**
 	 * Constructs a Player with an image at the starting position.
@@ -71,6 +71,7 @@ public class Player extends Sprite {
 		if(yPos >= FLOOR_HEIGHT) {
 			isJumping = true;
 			firstHalf = true;
+			jumpStrength = 4;
 		}
 //		System.out.println("jump");
 	}

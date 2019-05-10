@@ -6,9 +6,9 @@ import java.awt.image.BufferedImage;
  * @author oz
  *
  */
-public class Obstacle extends Sprite {
+public abstract class Obstacle extends Sprite {
 
-	public static int SPEED = 2;
+	public static int SPEED = 3;
 	private int x;
 	
 	/**
@@ -24,10 +24,7 @@ public class Obstacle extends Sprite {
 	 * Renders the obstacle, moving its location from right to left a number of pixels each tick.
 	 */
 	@Override
-	public void render(Graphics g) {
-		g.drawImage(getImg(), x, BOARD_HEIGHT / 2, null);
-		x -= SPEED;
-	}
+	public abstract void render(Graphics g);
 	
 	/**
 	 * Sets the obstacle location to the far right.
@@ -42,6 +39,10 @@ public class Obstacle extends Sprite {
 	 */
 	public int getX() {
 		return x;
+	}
+	
+	public void modifyX(int newPos) {
+		x += newPos;
 	}
 	
 

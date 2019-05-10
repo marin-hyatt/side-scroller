@@ -2,10 +2,7 @@ import java.io.File;
 
 import javax.swing.Timer;
 
-public class DinoGame implements Commons, Runnable, PlayerActions {
-	
-	private Thread gameAnimator;
-	private boolean running = false;
+public class DinoGame implements Commons, PlayerActions {
 	
 	private Player player;
 	private Background bg;
@@ -15,20 +12,22 @@ public class DinoGame implements Commons, Runnable, PlayerActions {
 	private KeyboardListener keyListener;
 	
 	public DinoGame() {
-		start();
+		//Display instructions to start
+		initGame();
 	}
 	
 	private void initGame() {
 		keyListener = new KeyboardListener(this);
 		initSprites();
+//		initTimer();
 	}
 	
 	private void initSprites() {
 		player = new Player(ImageLoader.loadImage("res" + File.separator + "student.png"));
 		bg = new Background(ImageLoader.loadImage("res" + File.separator + "bg.png"));
 		obstacleArr = new Obstacle[] {
-				new Obstacle(ImageLoader.loadImage("res" + File.separator + "pencil.png")),
-				new Obstacle(ImageLoader.loadImage("res" + File.separator + "homework.png"))
+				(Obstacle) new PencilObstacle(ImageLoader.loadImage("res" + File.separator + "pencil.png")),
+				(Obstacle) new HomeworkObstacle(ImageLoader.loadImage("res" + File.separator + "homework.png"))
 			};
 
 		spriteUpdater = new SpriteUpdater();
@@ -43,46 +42,10 @@ public class DinoGame implements Commons, Runnable, PlayerActions {
 		gameTimer.setInitialDelay(0);
 	}
 	
-	public void run(){
-		
-		initGame();
+	//user presses "a" to init timer
+	public void initTimer() {
+//		System.out.println("start");
 		gameTimer.start();
-		
-		while(running){
-			
-		}
-		
-		stop();
-		
-	}
-	
-	public synchronized void start(){
-		//if game is already running, don't do anything
-		if(running) {
-			return;
-		}
-		//if game isn't already running, start
-		else {
-			running = true;
-			gameAnimator = new Thread(this);
-			gameAnimator.start();
-		}
-	}
-	
-	public synchronized void stop(){
-		//if game isn't running, don't do anything
-		if(!running) {
-			return;
-		}
-		//if game is running, stop running
-		else{
-			running = false;
-		}
-		try {
-			gameAnimator.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	@Override
