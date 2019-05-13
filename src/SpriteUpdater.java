@@ -48,6 +48,8 @@ public class SpriteUpdater implements ActionListener {
 		
 		g = bs.getDrawGraphics();
 		
+		
+		
 		// draws images
 		for (Sprite eachSprite : sprites) {
 			// only draws obstacles if they are in the screen

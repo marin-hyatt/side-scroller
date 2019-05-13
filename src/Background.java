@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -10,6 +11,7 @@ public class Background extends Sprite {
 
 	private static int BG_WIDTH = 541;
 	private static int TICKS_UNTIL_FASTER = 600;
+	private static Font instructFont = new Font("Sanserif", Font.BOLD, 15);
 	private int speed;
 	private int ticksUntilFaster;
 	private int x;
@@ -41,7 +43,11 @@ public class Background extends Sprite {
 			incrementTimer();
 		}
 		else {
+			//puts instructions here
 			g.drawImage(getImg(), x, 0, null);
+			g.setFont(instructFont);
+			g.drawString("Press A to start.", 15, BOARD_HEIGHT / 4);
+			g.drawString("Avoid the obstacles by pressing the spacebar to jump!", 15, BOARD_HEIGHT / 4 + 50);
 		}
 	}
 	
