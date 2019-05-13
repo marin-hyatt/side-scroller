@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
  */
 public class Player extends Sprite {
 
+	private boolean isRunning;
 	private int xPos = BOARD_WIDTH / 10;
 	private int yPos = BOARD_HEIGHT / 2;
 	private boolean isJumping = false;
@@ -22,11 +23,12 @@ public class Player extends Sprite {
 	 */
 	public Player(BufferedImage img) {
 		super(img);
+		isRunning = false;
 	}
 	
 	@Override
 	public void render(Graphics g) {
-		if(isJumping) {
+		if(isJumping && isRunning) {
 //			System.out.println("jump");
 			if(yPos > topPoint && firstHalf) {
 				yPos -= jumpStrength;
@@ -74,6 +76,11 @@ public class Player extends Sprite {
 			jumpStrength = 4;
 		}
 //		System.out.println("jump");
+	}
+
+	@Override
+	public void initTimer() {
+		isRunning = true;
 	}
 
 }

@@ -23,6 +23,8 @@ public class SpriteUpdater implements ActionListener {
 	public SpriteUpdater() {
 		sprites = new ArrayList<Sprite>();
 		board = new Board();
+		
+		
 	}
 	
 	public void addSprite(Sprite newSprite) {
@@ -38,7 +40,6 @@ public class SpriteUpdater implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		bs = board.getCanvas().getBufferStrategy();
 		if (bs == null) {
 			board.getCanvas().createBufferStrategy(3);

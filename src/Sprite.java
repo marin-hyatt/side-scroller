@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
  * @author 
  *
  */
-public abstract class Sprite implements Commons {
+public abstract class Sprite implements Commons, PlayerActions{
 	
 	private BufferedImage img;
 	
@@ -32,4 +32,5 @@ public abstract class Sprite implements Commons {
 	 */
 	public abstract void render(Graphics g);
 
+	public abstract void initTimer();
 }

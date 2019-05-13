@@ -4,6 +4,8 @@ import javax.swing.Timer;
 
 public class DinoGame implements Commons, PlayerActions {
 	
+	private boolean isGameRunning;
+	
 	private Player player;
 	private Background bg;
 	private Timer gameTimer;
@@ -14,11 +16,13 @@ public class DinoGame implements Commons, PlayerActions {
 	public DinoGame() {
 		//Display instructions to start
 		initGame();
+		
 	}
 	
 	private void initGame() {
 		keyListener = new KeyboardListener(this);
 		initSprites();
+		gameTimer.start();
 //		initTimer();
 	}
 	
@@ -42,10 +46,23 @@ public class DinoGame implements Commons, PlayerActions {
 		gameTimer.setInitialDelay(0);
 	}
 	
-	//user presses "a" to init timer
+	//user presses "a" to init timer and start the game
 	public void initTimer() {
 //		System.out.println("start");
-		gameTimer.start();
+		isGameRunning = true;
+		
+		player.initTimer();
+		System.out.println("player timer initiated");
+		bg.initTimer();
+		System.out.println("bg timer initiated");
+		for(Obstacle element : obstacleArr) {
+			element.initTimer();
+			System.out.println("obstacle timer initiated");
+		}
+	}
+	
+	public boolean getGameState() {
+		return isGameRunning;
 	}
 	
 	@Override

@@ -13,6 +13,7 @@ public class Background extends Sprite {
 	private int speed;
 	private int ticksUntilFaster;
 	private int x;
+	private boolean isRunning;
 	
 	/**
 	 * Constructs a Background with an image and an x-coordinate.
@@ -30,12 +31,18 @@ public class Background extends Sprite {
 	 */
 	@Override
 	public void render(Graphics g) {
-		if (x <= -BG_WIDTH) {
-			x = 0;
+		
+		if(isRunning) {
+			if (x <= -BG_WIDTH) {
+				x = 0;
+			}
+			g.drawImage(getImg(), x, 0, null);
+			x -= speed;
+			incrementTimer();
 		}
-		g.drawImage(getImg(), x, 0, null);
-		x -= speed;
-		incrementTimer();
+		else {
+			g.drawImage(getImg(), x, 0, null);
+		}
 	}
 	
 	public void incrementTimer() {
@@ -44,6 +51,18 @@ public class Background extends Sprite {
 			speed++;
 			ticksUntilFaster = TICKS_UNTIL_FASTER;
 		}
+	}
+
+	@Override
+	public void initTimer() {
+		isRunning = true;
+		
+	}
+
+	@Override
+	public void jump() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
