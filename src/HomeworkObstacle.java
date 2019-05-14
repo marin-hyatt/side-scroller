@@ -16,4 +16,11 @@ public class HomeworkObstacle extends Obstacle {
 		decrementTimer();
 	}
 
+	@Override
+	public void jump() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 }

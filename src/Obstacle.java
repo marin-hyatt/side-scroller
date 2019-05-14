@@ -12,6 +12,8 @@ public abstract class Obstacle extends Sprite {
 	public int speed;
 	public int ticksUntilFaster;
 	private int x;
+	private boolean isRunning;
+	
 	
 	/**
 	 * Constructs a hidden obstacle with an image.
@@ -46,7 +48,9 @@ public abstract class Obstacle extends Sprite {
 	}
 	
 	public void modifyX(int newPos) {
-		x += newPos;
+		if(isRunning) {
+			x += newPos;
+		}
 	}
 	
 	public int getSpeed() {
@@ -65,5 +69,8 @@ public abstract class Obstacle extends Sprite {
 		}
 	}
 	
+	public void initTimer() {
+		isRunning = true;
+	}
 
 }
