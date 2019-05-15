@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
  * @author 
  *
  */
-public abstract class Sprite implements Commons {
+public abstract class Sprite implements Commons, PlayerActions{
 	
 	public static int TICKS_UNTIL_FASTER = 600;
 	
@@ -36,4 +36,5 @@ public abstract class Sprite implements Commons {
 	 */
 	public abstract void render(Graphics g);
 
+	public abstract void initTimer();
 }
