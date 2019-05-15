@@ -8,9 +8,6 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Obstacle extends Sprite {
 
-	private static int TICKS_UNTIL_FASTER = 600;
-	public int speed;
-	public int ticksUntilFaster;
 	private int x;
 	
 	/**

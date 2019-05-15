@@ -8,7 +8,11 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Sprite implements Commons {
 	
+	public static int TICKS_UNTIL_FASTER = 600;
+	
 	private BufferedImage img;
+	public int speed;
+	public int ticksUntilFaster;
 	
 	/**
 	 * Constructs a Sprite class with an image.
