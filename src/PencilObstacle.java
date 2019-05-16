@@ -12,7 +12,7 @@ public class PencilObstacle extends Obstacle {
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(getImg(), getX(), PENCIL_HEIGHT, null);
-		modifyX(-speed);
+		modifyX(-getSpeed());
 		decrementTimer();
 	}
 

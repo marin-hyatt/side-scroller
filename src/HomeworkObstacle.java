@@ -12,7 +12,7 @@ public class HomeworkObstacle extends Obstacle {
 	@Override
 	public void render(Graphics g) {
 		g.drawImage(getImg(), getX(), HOMEWORK_HEIGHT, null);
-		modifyX(-speed);
+		modifyX(-getSpeed());
 		decrementTimer();
 	}
 
