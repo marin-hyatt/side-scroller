@@ -41,6 +41,8 @@ public class DinoGame implements Commons, PlayerActions {
 		spriteUpdater.addSprite((Sprite) obstacleArr[1]);
 		spriteUpdater.registerKeyListener(keyListener);
 		
+		
+		
 		gameTimer = new Timer(TICK, spriteUpdater);
 		gameTimer.addActionListener(new ObstacleSpawner(obstacleArr));
 		gameTimer.setInitialDelay(0);
@@ -57,7 +59,7 @@ public class DinoGame implements Commons, PlayerActions {
 		System.out.println("bg timer initiated");
 		for(Obstacle element : obstacleArr) {
 			element.initTimer();
-			System.out.println("obstacle timer initiated");
+			System.out.println(element.getName() + "timer initiated");
 		}
 	}
 	

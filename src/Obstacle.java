@@ -11,7 +11,6 @@ public abstract class Obstacle extends Sprite {
 	private static int TICKS_UNTIL_FASTER = 600;
 	public int speed;
 	public int ticksUntilFaster;
-	private int x;
 	private boolean isRunning;
 	
 	
@@ -19,9 +18,11 @@ public abstract class Obstacle extends Sprite {
 	 * Constructs a hidden obstacle with an image.
 	 * @param img the obstacle image
 	 */
-	public Obstacle(BufferedImage img) {
+	public Obstacle(BufferedImage img, String n) {
 		super(img);
-		x = 0;
+		setName(n);
+		setX(BOARD_WIDTH + 10);
+		setY(BOARD_HEIGHT / 2);
 		speed = 4;
 		ticksUntilFaster = TICKS_UNTIL_FASTER;
 	}
@@ -36,20 +37,12 @@ public abstract class Obstacle extends Sprite {
 	 * Sets the obstacle location to the far right.
 	 */
 	public void reset() {
-		x = BOARD_WIDTH;
-	}
-	
-	/**
-	 * Returns x coordinate of obstacle's location.
-	 * @return the x coordinate
-	 */
-	public int getX() {
-		return x;
+		setX(BOARD_WIDTH);
 	}
 	
 	public void modifyX(int newPos) {
 		if(isRunning) {
-			x += newPos;
+			setX(getX() + newPos);
 		}
 	}
 	

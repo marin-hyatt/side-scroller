@@ -33,7 +33,7 @@ public class ObstacleSpawner implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (ticksUntilSpawn == 0) {
+		if (ticksUntilSpawn == -100) {
 			int chosenIndex = (int) (Math.random() * obstacles.length);
 			obstacles[chosenIndex].reset();
 			ticksUntilSpawn = (int) (Math.random() * RANGE + MAX);
