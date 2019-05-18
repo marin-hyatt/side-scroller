@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Obstacle extends Sprite {
 
+	//tempWidth is for resetting the width after every time the obstacle goes off the screen
+	private int tempWidth;
 	private static int TICKS_UNTIL_FASTER = 600;
 	public int speed;
 	public int ticksUntilFaster;
@@ -20,6 +22,7 @@ public abstract class Obstacle extends Sprite {
 	 */
 	public Obstacle(BufferedImage img, String n) {
 		super(img);
+		tempWidth = img.getWidth();
 		setName(n);
 		setX(BOARD_WIDTH + 10);
 		setY(BOARD_HEIGHT / 2);
@@ -38,6 +41,7 @@ public abstract class Obstacle extends Sprite {
 	 */
 	public void reset() {
 		setX(BOARD_WIDTH);
+		setWidth(tempWidth);
 	}
 	
 	public void modifyX(int newPos) {

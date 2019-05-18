@@ -59,6 +59,10 @@ public class SpriteUpdater implements ActionListener {
 				if (((Obstacle) eachSprite).getX() > 0) {
 					eachSprite.render(g);
 				}
+				else {
+					//makes rectangle bounds a line so it doesn't trigger collision
+					eachSprite.setWidth(0);
+				}
 			}
 			else {
 				eachSprite.render(g);
