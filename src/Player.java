@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
  *
  */
 public class Player extends Sprite {
-
-	private boolean isRunning;
+//	private int xPos = BOARD_WIDTH / 10;
+//	private int yPos = BOARD_HEIGHT / 2;
 	private boolean isJumping = false;
 	private double jumpStrength = 4;
 	private double weight = 0.08;
@@ -21,7 +21,6 @@ public class Player extends Sprite {
 	 */
 	public Player(BufferedImage img) {
 		super(img);
-		isRunning = false;
 		setName("player");
 		setX(BOARD_WIDTH / 10);
 		setY(BOARD_HEIGHT / 2);
@@ -32,7 +31,7 @@ public class Player extends Sprite {
 	
 	@Override
 	public void render(Graphics g) {
-		if(isJumping && isRunning) {
+		if(isJumping && getIsRunning()) {
 //			System.out.println("jump");
 			if(getY() > topPoint && firstHalf) {
 				setY((int) (getY() - jumpStrength));
@@ -64,11 +63,6 @@ public class Player extends Sprite {
 			jumpStrength = 4;
 		}
 //		System.out.println("jump");
-	}
-
-	@Override
-	public void initTimer() {
-		isRunning = true;
 	}
 
 }

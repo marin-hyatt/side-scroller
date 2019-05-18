@@ -7,7 +7,9 @@ import java.awt.image.BufferedImage;
  * @author 
  *
  */
-public abstract class Sprite implements Commons, PlayerActions{
+public abstract class Sprite implements Commons, PlayerActions {
+	
+	public static int TICKS_UNTIL_FASTER = 600;
 	
 	private BufferedImage img;
 	private String name;
@@ -15,6 +17,9 @@ public abstract class Sprite implements Commons, PlayerActions{
 	private int y;
 	private int width;
 	private int height;
+	private int speed;
+	private int ticksUntilFaster;
+	private boolean isRunning;
 	
 	/**
 	 * Constructs a Sprite class with an image.
@@ -24,6 +29,8 @@ public abstract class Sprite implements Commons, PlayerActions{
 		this.img = img;
 		width = img.getWidth();
 		height = img.getHeight();
+		isRunning = false;
+		ticksUntilFaster = TICKS_UNTIL_FASTER;
 	}
 	
 	public String getName() {
@@ -44,6 +51,10 @@ public abstract class Sprite implements Commons, PlayerActions{
 	
 	public void setX(int xPos) {
 		x = xPos;
+	}
+	
+	public void modifyX(int newPos) {
+		x += newPos;
 	}
 	
 	/**
@@ -96,8 +107,6 @@ public abstract class Sprite implements Commons, PlayerActions{
 		}
 	}
 	
-	
-	
 	/**
 	 * Returns the stored image.
 	 * @return the stored image
@@ -110,11 +119,38 @@ public abstract class Sprite implements Commons, PlayerActions{
 		return(getName() + x + " " + y + " " + width + " " + height);
 	}
 	
+	public int getSpeed() {
+		return speed;
+	}
+	
+	public void setSpeed(int newSpeed) {
+		speed = newSpeed;
+	}
+	
+	public void speedUp() {
+		speed++;
+	}
+	
+	public void decrementTimer() {
+		ticksUntilFaster--;
+		if (ticksUntilFaster == 0) {
+			speedUp();
+			ticksUntilFaster = TICKS_UNTIL_FASTER;
+		}
+	}
+	
 	/**
 	 * Instructions for rendering the image.
 	 * @param g
 	 */
 	public abstract void render(Graphics g);
 
-	public abstract void initTimer();
+	public void initTimer() {
+		isRunning = true;
+	}
+	
+	public boolean getIsRunning() {
+		return isRunning;
+	}
+	
 }
