@@ -41,6 +41,10 @@ public abstract class Sprite implements Commons, PlayerActions {
 		name = n;
 	}
 	
+	public boolean getGameState() {
+		return isRunning;
+	}
+	
 	/**
 	 * Returns x coordinate of sprite's location.
 	 * @return the x coordinate
@@ -54,7 +58,9 @@ public abstract class Sprite implements Commons, PlayerActions {
 	}
 	
 	public void modifyX(int newPos) {
-		x += newPos;
+		if(isRunning) {
+			x += newPos;
+		}
 	}
 	
 	/**

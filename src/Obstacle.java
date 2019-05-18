@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
  * @author oz
  *
  */
-public abstract class Obstacle extends Sprite {
+public class Obstacle extends Sprite {
 
 	//tempWidth is for resetting the width after every time the obstacle goes off the screen
 	private int tempWidth;
@@ -28,7 +28,13 @@ public abstract class Obstacle extends Sprite {
 	 * Renders the obstacle, moving its location from right to left a number of pixels each tick.
 	 */
 	@Override
-	public abstract void render(Graphics g);
+	public void render(Graphics g) {
+		if(getGameState()) {
+			g.drawImage(getImg(), (int) getX(), getY(), null);
+			modifyX(-getSpeed());
+			decrementTimer();
+		}
+	}
 	
 	/**
 	 * Sets the obstacle location to the far right.
@@ -36,6 +42,12 @@ public abstract class Obstacle extends Sprite {
 	public void reset() {
 		setX(BOARD_WIDTH);
 		setWidth(tempWidth);
+	}
+
+	@Override
+	public void jump() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
