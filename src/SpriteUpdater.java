@@ -23,12 +23,11 @@ public class SpriteUpdater implements ActionListener {
 	public SpriteUpdater() {
 		sprites = new ArrayList<Sprite>();
 		board = new Board();
-		
-		
 	}
 	
 	public void addSprite(Sprite newSprite) {
 		sprites.add(newSprite);
+//		System.out.println(sprites.get(sprites.size()-1));
 	}
 	
 	/**
@@ -48,7 +47,9 @@ public class SpriteUpdater implements ActionListener {
 		
 		g = bs.getDrawGraphics();
 		
-		
+		//checks if player collides with pencil obstacle or homework obstacle
+		sprites.get(1).checkCollisions(sprites.get(2));
+		sprites.get(1).checkCollisions(sprites.get(3));
 		
 		// draws images
 		for (Sprite eachSprite : sprites) {
@@ -58,12 +59,21 @@ public class SpriteUpdater implements ActionListener {
 				if (((Obstacle) eachSprite).getX() > 0) {
 					eachSprite.render(g);
 				}
+				else {
+					//makes rectangle bounds a line so it doesn't trigger collision
+					eachSprite.setWidth(0);
+				}
 			}
 			else {
 				eachSprite.render(g);
 			}
+			g.drawRect(eachSprite.getX(), eachSprite.getY(), eachSprite.getWidth(), eachSprite.getHeight());
 		}
-
+		
+//		for(Sprite s : sprites) {
+//			System.out.println(s);
+//		} 
+		
 		// shows images
 		bs.show();
 		g.dispose();

@@ -7,13 +7,12 @@ import java.awt.image.BufferedImage;
  *
  */
 public class Player extends Sprite {
-
-	private int xPos = BOARD_WIDTH / 10;
-	private int yPos = BOARD_HEIGHT / 2;
+//	private int xPos = BOARD_WIDTH / 10;
+//	private int yPos = BOARD_HEIGHT / 2;
 	private boolean isJumping = false;
 	private double jumpStrength = 4;
 	private double weight = 0.08;
-	private int topPoint = yPos - 100;
+	private double topPoint;
 	private boolean firstHalf = false;
 	
 	/**
@@ -22,22 +21,28 @@ public class Player extends Sprite {
 	 */
 	public Player(BufferedImage img) {
 		super(img);
+		setName("player");
+		setX(BOARD_WIDTH / 10);
+		setY(BOARD_HEIGHT / 2);
+		setWidth(55);
+		setHeight(85);
+		topPoint = getY() - 100;
 	}
 	
 	@Override
 	public void render(Graphics g) {
 		if(isJumping && getIsRunning()) {
 //			System.out.println("jump");
-			if(yPos > topPoint && firstHalf) {
-				yPos -= jumpStrength;
+			if(getY() > topPoint && firstHalf) {
+				setY((int) (getY() - jumpStrength));
 				jumpStrength -= weight;
 			}
-			if(yPos <= topPoint) {
+			if(getY() <= topPoint) {
 //				System.out.println("t");
 				firstHalf = false;
 			}
-			if(!firstHalf && yPos <= FLOOR_HEIGHT) {
-				yPos += jumpStrength;
+			if(!firstHalf && getY() <= FLOOR_HEIGHT) {
+				setY((int) (getY() + jumpStrength));
 				jumpStrength += weight;
 //				System.out.println("t");
 			}
@@ -48,27 +53,11 @@ public class Player extends Sprite {
 //			else if(yPos <= FLOOR_HEIGHT && yPos <= topPoint) {
 //				yPos--;
 //			}
-		g.drawImage(getImg(), xPos, yPos, null);
-	}
-	
-	/**
-	 * Returns x coordinate of the player's location.
-	 * @return the x coordinate
-	 */
-	public int getX() {
-		return xPos;
-	}
-	
-	/**
-	 * Returns y coordinate of the player's location.
-	 * @return the y coordinate
-	 */
-	public int getY() {
-		return yPos;
+		g.drawImage(getImg(), (int) getX(), (int) getY(), null);
 	}
 	
 	public void jump() {
-		if(yPos >= FLOOR_HEIGHT) {
+		if(getY() >= FLOOR_HEIGHT) {
 			isJumping = true;
 			firstHalf = true;
 			jumpStrength = 4;
