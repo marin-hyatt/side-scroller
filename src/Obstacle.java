@@ -19,7 +19,7 @@ public class Obstacle extends Sprite {
 		super(img);
 		tempWidth = img.getWidth();
 		setName(n);
-		setX(0);
+		setX(-100);
 		setY(BOARD_HEIGHT / 2);
 		setSpeed(4);
 	}

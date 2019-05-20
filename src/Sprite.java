@@ -107,10 +107,12 @@ public abstract class Sprite implements Commons, PlayerActions {
 		return new Rectangle(x, y, width, height);
 	}
 	
-	public void checkCollisions(Sprite s) {
+	public boolean checkCollisions(Sprite s) {
 		if(getBounds().intersects(s.getBounds())) {
 			System.out.println("collide");
+			return true;
 		}
+		return false;
 	}
 	
 	/**
