@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * The sprites of obstacles.
- * @author oz
+ * @author
  *
  */
 public class Obstacle extends Sprite {
@@ -19,7 +19,7 @@ public class Obstacle extends Sprite {
 		super(img);
 		tempWidth = img.getWidth();
 		setName(n);
-		setX(BOARD_WIDTH + 10);
+		setX(0);
 		setY(BOARD_HEIGHT / 2);
 		setSpeed(4);
 	}

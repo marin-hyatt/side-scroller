@@ -41,7 +41,6 @@ public class ObstacleSpawner implements ActionListener {
 		else {
 			ticksUntilSpawn--;
 		}
-		
 	}
 
 }

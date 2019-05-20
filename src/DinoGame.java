@@ -1,3 +1,4 @@
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.swing.Timer;
@@ -8,6 +9,7 @@ public class DinoGame implements Commons, PlayerActions {
 	
 	private Player player;
 	private Background bg;
+	private ScoreCounter scoreCounter;
 	private Timer gameTimer;
 	private SpriteUpdater spriteUpdater;
 	private Obstacle[] obstacleArr;
@@ -29,6 +31,7 @@ public class DinoGame implements Commons, PlayerActions {
 	private void initSprites() {
 		player = new Player(ImageLoader.loadImage("res" + File.separator + "student.png"));
 		bg = new Background(ImageLoader.loadImage("res" + File.separator + "bg.png"));
+		scoreCounter = new ScoreCounter(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB));
 		obstacleArr = new Obstacle[] {
 				(Obstacle) new PencilObstacle(ImageLoader.loadImage("res" + File.separator + "pencil.png")),
 				(Obstacle) new HomeworkObstacle(ImageLoader.loadImage("res" + File.separator + "homework.png"))
@@ -37,6 +40,7 @@ public class DinoGame implements Commons, PlayerActions {
 		spriteUpdater = new SpriteUpdater();
 		spriteUpdater.addSprite((Sprite) bg);
 		spriteUpdater.addSprite((Sprite) player);
+		spriteUpdater.addSprite(scoreCounter);
 		spriteUpdater.addSprite((Sprite) obstacleArr[0]);
 		spriteUpdater.addSprite((Sprite) obstacleArr[1]);
 		spriteUpdater.registerKeyListener(keyListener);
@@ -44,7 +48,6 @@ public class DinoGame implements Commons, PlayerActions {
 		
 		
 		gameTimer = new Timer(TICK, spriteUpdater);
-		gameTimer.addActionListener(new ObstacleSpawner(obstacleArr));
 		gameTimer.setInitialDelay(0);
 	}
 	
@@ -53,6 +56,8 @@ public class DinoGame implements Commons, PlayerActions {
 //		System.out.println("start");
 		isGameRunning = true;
 		
+		gameTimer.addActionListener(new ObstacleSpawner(obstacleArr));
+		gameTimer.addActionListener(scoreCounter);
 		player.initTimer();
 		System.out.println("player timer initiated");
 		bg.initTimer();
