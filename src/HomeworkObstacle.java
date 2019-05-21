@@ -9,12 +9,4 @@ public class HomeworkObstacle extends Obstacle {
 		super(img, "homework");
 		setY(HOMEWORK_HEIGHT);
 	}
-
-	@Override
-	public void render(Graphics g) {
-		g.drawImage(getImg(), (int) getX(), getY(), null);
-		modifyX(-getSpeed());
-		decrementTimer();
-	}
-
 }

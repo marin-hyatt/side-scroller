@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * @author 
  *
  */
-public class SpriteUpdater implements ActionListener {
+public class SpriteUpdater implements ActionListener, PlayerActions {
 	
 	private Board board;
 	private BufferStrategy bs;
@@ -48,33 +48,33 @@ public class SpriteUpdater implements ActionListener {
 		g = bs.getDrawGraphics();
 		
 		//checks if player collides with pencil obstacle or homework obstacle
-		if ( sprites.get(1).checkCollisions(sprites.get(2)) ||
-				sprites.get(1).checkCollisions(sprites.get(3)) ) {
-			System.out.println("stop game");
+		if (sprites.get(1).checkCollisions(sprites.get(3)) || sprites.get(1).checkCollisions(sprites.get(4)) ) {
+			if(!sprites.get(1).getFailed()) {
+				resetGame();
+			}
 		}
-		else {
-			// draws images
-			for (Sprite eachSprite : sprites) {
-				// only draws obstacles if they are in the screen
-				if ((eachSprite instanceof Obstacle)) {
-					if (((Obstacle) eachSprite).getX() > 0) {
-						eachSprite.render(g);
-					}
-					else {
-						//makes rectangle bounds a line so it doesn't trigger collision
-						eachSprite.setWidth(0);
-					}
-				}
-				else {
+		
+		// draws images
+		for (Sprite eachSprite : sprites) {
+			// only draws obstacles if they are in the screen
+			if ((eachSprite instanceof Obstacle)) {
+				if (((Obstacle) eachSprite).getX() > 0) {
 					eachSprite.render(g);
 				}
-				g.drawRect(eachSprite.getX(), eachSprite.getY(), eachSprite.getWidth(), eachSprite.getHeight());
+				else {
+					//makes rectangle bounds a line so it doesn't trigger collision
+					eachSprite.setWidth(0);
+				}
 			}
+			else {
+				eachSprite.render(g);
+			}
+//			g.drawRect(eachSprite.getX(), eachSprite.getY(), eachSprite.getWidth(), eachSprite.getHeight());
+		}
 			
 	//		for(Sprite s : sprites) {
 	//			System.out.println(s);
 	//		} 
-		}
 			
 		// shows images
 		bs.show();
@@ -84,6 +84,32 @@ public class SpriteUpdater implements ActionListener {
 	
 	public void registerKeyListener(KeyboardListener k) {
 		board.getFrame().addKeyListener(k);
+	}
+
+	@Override
+	public void initTimer() {
+		for(Sprite s : sprites) {
+			s.initTimer();
+		}
+	}
+
+	@Override
+	public void resetGame() {
+//		System.out.println("reset");
+		for(Sprite s : sprites) {
+			s.failGame();
+//			System.out.println(s);
+		}
+	}
+
+	@Override
+	public void jump() {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public boolean getGameState() {
+		return(sprites.get(0).getGameState());
 	}
 	
 }

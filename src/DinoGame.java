@@ -56,25 +56,39 @@ public class DinoGame implements Commons, PlayerActions {
 //		System.out.println("start");
 		isGameRunning = true;
 		
-		gameTimer.addActionListener(new ObstacleSpawner(obstacleArr));
-		gameTimer.addActionListener(scoreCounter);
-		player.initTimer();
-		System.out.println("player timer initiated");
-		bg.initTimer();
-		System.out.println("bg timer initiated");
+		if(!player.getFailed()) {
+			gameTimer.addActionListener(new ObstacleSpawner(obstacleArr));
+			gameTimer.addActionListener(scoreCounter);
+		}
+		
+		spriteUpdater.initTimer();
+//		player.initTimer();
+//		System.out.println("player timer initiated");
+//		bg.initTimer();
+//		System.out.println("bg timer initiated");
 		for(Obstacle element : obstacleArr) {
 			element.initTimer();
-			System.out.println(element.getName() + "timer initiated");
+//			System.out.println(element.getName() + "timer initiated");
 		}
 	}
 	
-	public boolean getGameState() {
-		return isGameRunning;
-	}
+//	public boolean getGameState() {
+//		return isGameRunning;
+//	}
 	
 	@Override
 	public void jump() {
 		player.jump();	
+	}
+
+	@Override
+	public void resetGame() {
+		isGameRunning = false;
+	}
+
+	@Override
+	public boolean getGameState() {
+		return player.getGameState();
 	}
 	
 }

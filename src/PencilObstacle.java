@@ -9,12 +9,4 @@ public class PencilObstacle extends Obstacle {
 		super(img, "pencil");
 		setY(PENCIL_HEIGHT);
 	}
-
-	@Override
-	public void render(Graphics g) {
-		g.drawImage(getImg(), (int) getX(), getY(), null);
-		modifyX(-getSpeed());
-		decrementTimer();
-	}
-
 }

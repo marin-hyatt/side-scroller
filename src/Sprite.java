@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
  * @author 
  *
  */
-public abstract class Sprite implements Commons, PlayerActions {
+public abstract class Sprite implements Commons {
 	
 	public static int TICKS_UNTIL_FASTER = 600;
 	
@@ -20,6 +20,7 @@ public abstract class Sprite implements Commons, PlayerActions {
 	private int speed;
 	private int ticksUntilFaster;
 	private boolean isRunning;
+	private boolean failed;
 	
 	/**
 	 * Constructs a Sprite class with an image.
@@ -42,7 +43,13 @@ public abstract class Sprite implements Commons, PlayerActions {
 	}
 	
 	public boolean getGameState() {
+//		System.out.println(isRunning);
 		return isRunning;
+	}
+	
+	protected void setGameState(boolean b) {
+		isRunning = b;
+		failed = true;
 	}
 	
 	/**
@@ -107,9 +114,13 @@ public abstract class Sprite implements Commons, PlayerActions {
 		return new Rectangle(x, y, width, height);
 	}
 	
+	public boolean getFailed() {
+		return failed;
+	}
+	
 	public boolean checkCollisions(Sprite s) {
 		if(getBounds().intersects(s.getBounds())) {
-			System.out.println("collide");
+//			System.out.println("collide");
 			return true;
 		}
 		return false;
@@ -124,13 +135,21 @@ public abstract class Sprite implements Commons, PlayerActions {
 	}
 	
 	public String toString() {
-		return(getName() + x + " " + y + " " + width + " " + height);
+//		return(getName() + x + " " + y + " " + width + " " + height);
+		return(getName() + getFailed());
 	}
 	
 	public int getSpeed() {
 		return speed;
 	}
 	
+	public int getTicksUntilFaster() {
+		return ticksUntilFaster;
+	}
+	
+	public void setTicksUntilFaster(int t) {
+		ticksUntilFaster = t;
+	}
 	public void setSpeed(int newSpeed) {
 		speed = newSpeed;
 	}
@@ -147,18 +166,24 @@ public abstract class Sprite implements Commons, PlayerActions {
 		}
 	}
 	
+	public void initTimer() {
+//		System.out.println("init");
+		isRunning = true;
+		failed = false;
+		
+	}
+	
+	public void failGame() {
+		isRunning = false;
+		failed = true;
+		setSpeed(2);
+//		System.out.println(getName() + " fail");
+//		System.out.println("value of isRunning: " + isRunning);
+	}
+	
 	/**
 	 * Instructions for rendering the image.
 	 * @param g
 	 */
 	public abstract void render(Graphics g);
-
-	public void initTimer() {
-		isRunning = true;
-	}
-	
-	public boolean getIsRunning() {
-		return isRunning;
-	}
-	
 }

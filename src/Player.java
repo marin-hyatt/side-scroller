@@ -31,7 +31,8 @@ public class Player extends Sprite {
 	
 	@Override
 	public void render(Graphics g) {
-		if(isJumping && getIsRunning()) {
+//		System.out.println(getGameState());
+		if(isJumping && getGameState()) {
 //			System.out.println("jump");
 			if(getY() > topPoint && firstHalf) {
 				setY((int) (getY() - jumpStrength));
@@ -46,13 +47,10 @@ public class Player extends Sprite {
 				jumpStrength += weight;
 //				System.out.println("t");
 			}
-//			isJumping = false;
-//			yPos = FLOOR_HEIGHT;
-//				yPos--;
+			if(getY() == FLOOR_HEIGHT) {
+				isJumping = false;
+			}
 		}
-//			else if(yPos <= FLOOR_HEIGHT && yPos <= topPoint) {
-//				yPos--;
-//			}
 		g.drawImage(getImg(), (int) getX(), (int) getY(), null);
 	}
 	

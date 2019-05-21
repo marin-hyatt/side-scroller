@@ -11,8 +11,11 @@ public class KeyboardListener implements KeyListener{
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if(e.getKeyChar() == 'a') {
-			p.initTimer();
+		if(e.getKeyChar() == 'a' || e.getKeyChar() == 'A') {
+//			System.out.println("gamestate: " + p.getGameState());
+			if(!p.getGameState()) {
+				p.initTimer();
+			}
 		}
 		else if(e.getKeyChar() == ' ') {
 			p.jump();

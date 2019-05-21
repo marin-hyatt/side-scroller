@@ -19,26 +19,34 @@ public class ScoreCounter extends Sprite implements ActionListener {
 	}
 
 	@Override
-	public void jump() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void render(Graphics g) {
-		g.setFont(scoreFont);
-		g.drawString(String.valueOf(score), BOARD_WIDTH - 50, 50);
+		if(getGameState()) {
+			g.setFont(scoreFont);
+			g.drawString(String.valueOf(score), BOARD_WIDTH - 50, 50);
+		}
+	}
+	
+	public void failGame() {
+		super.failGame();
+		ticksUntilScore = TICKS_UNTIL_SCORE;
+		score = 0;
+//		System.out.println(ticksUntilScore + " " + score);
+	}
+	
+	public int getScore() {
+		return score;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (ticksUntilScore == 0) {
-			score++;
-			ticksUntilScore = TICKS_UNTIL_SCORE;
-		}
-		else {
-			ticksUntilScore--;
+		if(getGameState()) {
+			if (ticksUntilScore == 0) {
+				score++;
+				ticksUntilScore = TICKS_UNTIL_SCORE;
+			}
+			else {
+				ticksUntilScore--;
+			}
 		}
 	}
-
 }

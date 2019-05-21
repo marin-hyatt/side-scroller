@@ -33,13 +33,15 @@ public class ObstacleSpawner implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (ticksUntilSpawn == 0) {
-			int chosenIndex = (int) (Math.random() * obstacles.length);
-			obstacles[chosenIndex].reset();
-			ticksUntilSpawn = (int) (Math.random() * RANGE + MAX);
-		}
-		else {
-			ticksUntilSpawn--;
+		if(obstacles[0].getGameState()) {
+			if (ticksUntilSpawn == 0) {
+				int chosenIndex = (int) (Math.random() * obstacles.length);
+				obstacles[chosenIndex].reset();
+				ticksUntilSpawn = (int) (Math.random() * RANGE + MAX);
+			}
+			else {
+				ticksUntilSpawn--;
+			}
 		}
 	}
 
