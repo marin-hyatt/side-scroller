@@ -11,6 +11,7 @@ public class ScoreCounter extends Sprite implements ActionListener {
 	
 	private int ticksUntilScore;
 	private int score;
+	private int prevScore;
 
 	public ScoreCounter(BufferedImage img) {
 		super(img);
@@ -27,14 +28,17 @@ public class ScoreCounter extends Sprite implements ActionListener {
 	}
 	
 	public void failGame() {
+//		prevScore = score;
 		super.failGame();
 		ticksUntilScore = TICKS_UNTIL_SCORE;
 		score = 0;
-//		System.out.println(ticksUntilScore + " " + score);
+//		
+//		System.out.println(score);
 	}
 	
 	public int getScore() {
-		return score;
+		System.out.println("getScore: " + prevScore);
+		return prevScore;
 	}
 
 	@Override
@@ -47,6 +51,7 @@ public class ScoreCounter extends Sprite implements ActionListener {
 			else {
 				ticksUntilScore--;
 			}
+			prevScore = score;
 		}
 	}
 }

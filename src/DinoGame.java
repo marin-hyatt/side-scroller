@@ -3,6 +3,10 @@ import java.io.File;
 
 import javax.swing.Timer;
 
+/**
+ * The main class for the game
+ *
+ */
 public class DinoGame implements Commons, PlayerActions {
 	
 	private boolean isGameRunning;

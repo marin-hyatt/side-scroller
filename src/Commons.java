@@ -1,4 +1,6 @@
-
+/**
+ * Interface with some common constants, such as the width of the window for the game and the frames per second.
+ */
 public interface Commons {
 	final int BOARD_WIDTH = 450;
 	final int BOARD_HEIGHT = 300;

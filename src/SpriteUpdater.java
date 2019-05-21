@@ -36,6 +36,8 @@ public class SpriteUpdater implements ActionListener, PlayerActions {
 	 * constructed from the BufferStrategy. Each Sprite can then be rendered using the Graphics
 	 * object onto the buffer. The buffer then shows the render on the screen and the Graphics
 	 * object is disposed.
+	 * 
+	 * 
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -50,6 +52,10 @@ public class SpriteUpdater implements ActionListener, PlayerActions {
 		//checks if player collides with pencil obstacle or homework obstacle
 		if (sprites.get(1).checkCollisions(sprites.get(3)) || sprites.get(1).checkCollisions(sprites.get(4)) ) {
 			if(!sprites.get(1).getFailed()) {
+				//displays score before it gets reset to 0
+				((Background) sprites.get(0)).setScore(((ScoreCounter) sprites.get(2)).getScore());
+				System.out.println(((ScoreCounter) sprites.get(2)).getScore());
+				//resets game
 				resetGame();
 			}
 		}
@@ -95,6 +101,7 @@ public class SpriteUpdater implements ActionListener, PlayerActions {
 
 	@Override
 	public void resetGame() {
+		
 //		System.out.println("reset");
 		for(Sprite s : sprites) {
 			s.failGame();
