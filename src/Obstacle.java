@@ -8,8 +8,14 @@ import java.awt.image.BufferedImage;
  */
 public class Obstacle extends Sprite {
 
-	//tempWidth is for resetting the width after every time the obstacle goes off the screen
+	/**
+	 * Instance variable that stores the width of the obstacle, as the width gets temporarily set to 0 every time it goes off the screen.
+	 */
 	private int tempWidth;
+	
+	/**
+	 * Constant storing the number of ticks until the obstacle's speed increases.
+	 */
 	private final int TICKS_UNTIL_FASTER = 400;
 
 	/**
@@ -26,6 +32,9 @@ public class Obstacle extends Sprite {
 		setSpeed(4);
 	}
 	
+	/**
+	 * If the player fails the game, resets the obstacle speed and sets the obstacles's position to be off the screen.
+	 */
 	public void failGame() {
 		super.failGame();
 		setSpeed(4);
@@ -54,6 +63,9 @@ public class Obstacle extends Sprite {
 		setWidth(tempWidth);
 	}
 	
+	/**
+	 * Decrements the amount of time until the obstacle speeds up, and speeds the obstacle up once that reaches 0.
+	 */
 	public void decrementTimer() {
 		setTicksUntilFaster(getTicksUntilFaster() - 1);
 		if (getTicksUntilFaster() == 0) {

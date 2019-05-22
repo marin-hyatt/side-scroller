@@ -8,10 +8,24 @@ import java.awt.event.ActionListener;
  */
 public class ObstacleSpawner implements ActionListener {
 
+	/**
+	 * Constant representing the range for how long the spawner can go without spawning an obstacle.
+	 */
 	final int RANGE = 76;
+	
+	/**
+	 * Constant representing the maximum number of ticks the obstacle spawner can go without spawning an obstacle.
+	 */
 	final int MAX = 255;
 	
+	/**
+	 * Instance variable representing the number of ticks until an obstacle spawns.
+	 */
 	private int ticksUntilSpawn;
+	
+	/**
+	 * Instance variable storing the obstacles to generate.
+	 */
 	private Obstacle[] obstacles;
 	
 	/**
